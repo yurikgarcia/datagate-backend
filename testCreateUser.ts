@@ -1,4 +1,4 @@
-import { createUser } from './src/user'
+import { createUser } from './src/routes/user'
 
 (async () => {
   try {
