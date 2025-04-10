@@ -2,21 +2,26 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import authRoutes from './routes/auth';
-const { getUsers } = require('./routes/user'); 
+const { getUsers, createUser } = require('./routes/user'); 
 dotenv.config();
 
 
 const app = express();
 const port = 8080;
+
+//Need to adjust to environment based config
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: true,
   credentials: true,
 }));
 app.use(express.json());
 
-//------ROUTES------//
+//------AUTH ROUTES------//
 app.use('/auth', authRoutes);
-app.get('/users', getUsers); 
+
+//------USER ROUTES------//
+app.get('/users', getUsers);
+app.post('/newUser', createUser);  
 
 
 app.get('/', (req, res) => {
