@@ -2,6 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import authRoutes from './routes/auth';
+
+const { userLogin } = require('./routes/login')
 const { getUsers, createUser } = require('./routes/user'); 
 dotenv.config();
 
@@ -18,6 +20,9 @@ app.use(express.json());
 
 //------AUTH ROUTES------//
 app.use('/auth', authRoutes);
+
+//------LOGIN ROUTES------//
+app.post('/login', userLogin);
 
 //------USER ROUTES------//
 app.get('/users', getUsers);
