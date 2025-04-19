@@ -31,7 +31,12 @@ async function userLogin(req: Request, res: Response) {
     user: {
       id: user.id,
       email: user.email,
-      role: user.role,
+      first_name: user.first_name,
+      last_name: user.last_name,
+      organization: user.organization,
+      roles_admin: user.roles_admin,
+      roles_edit: user.roles_edit,
+      roles_view: user.roles_view,
     },
   });
 }
