@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 import { supabase } from "../../supabase";
 import { pool } from '../../db';
+import bcrypt from 'bcrypt'
+
 
 async function getUsers(req: Request, res: Response) {
   const { data: users, error } = await supabase
@@ -15,6 +17,7 @@ async function getUsers(req: Request, res: Response) {
 
 async function createUser(req: Request, res: Response) {
   const { firstName, lastName, email, organization, password } = req.body;
+  const hashedPassword = await bcrypt.hash(password, 10);
   const { data, error } = await supabase
     .from('users')
     .insert([
@@ -23,7 +26,7 @@ async function createUser(req: Request, res: Response) {
         last_name: lastName,
         email,
         organization,
-        password,
+        password: hashedPassword,
       },
     ])
     .select(); 
